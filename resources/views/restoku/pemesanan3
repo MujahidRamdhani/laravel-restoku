@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
+    <title>{{ config('app.name', 'Laravel') }}</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.bunny.net">
+    <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
+
+    <!-- Scripts -->
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
+</head>
+
+<body>
+    <div class="container mx-auto p-4">
+        <div class="flex justify-center ">
+            <header class="text-6xl">restoku</header>
+        </div>
+        <div class="flex justify-center ">
+            <img src="header.jpg" alt="" class="object-cover h-56 w-full">
+        </div>
+        <div class="w-1/3 mt-4">
+            <form action="">
+                <div class="flex flex-grow justify-center mb-4">
+                    <input
+                        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                        id="username" type="text" placeholder="Username">
+                    <div class="ml-2">
+                        <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                            cari
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+      
+
+
+
+        <form action="/pemesanan" method="post" enctype="multipart/form-data">
+        @csrf
+        @foreach ($menus as $menu)
+       
+        <div class="container mx-auto ">
+            <div class="grid grid-cols-2 gap-6 md:grid-cols-3">
+                
+                    <div
+                    class="relative max-w-sm min-w-[340px] bg-white shadow-md rounded-3xl p-2 mx-1 my-3 cursor-pointer">
+                    <div class="overflow-x-hidden rounded-2xl relative">
+                        <img class="h-40 rounded-2xl w-full object-cover"
+                            src="https://pixahive.com/wp-content/uploads/2020/10/Gym-shoes-153180-pixahive.jpg">
+                    </div>
+                    <div class="mt-4 pl-2 mb-2 flex justify-between ">
+                        <div>
+                            <p class="text-lg font-semibold text-gray-900 mb-0">{{ $menu->namaMenu }}</p>
+                            <p class="text-md text-gray-800 mt-0">{{ $menu->harga }}</p>
+                        </div>
+                        <div class="flex flex-col-reverse mb-1 mr-4 group cursor-pointer">
+                      <input type="number" placeholder="banyaknya" name="jumlahPesanan[]">
+                    </div>
+                    </div>
+                </div>
+               
+            </div>
+        </div>
+        @endforeach
+        <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"> pesan</button>
+    </form>
+
+
+
+    </div>
+</body>
+
+</html>
